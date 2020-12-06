@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
+import {Products, NavBar} from './components'
+import {commerce} from './lib/commerce'
+
 
 const App = () => {
+    const [products; setProducts] = useState([])
     return (
         <div>
-         <h1>E-Commerce</h1>   
+            <NavBar />
+            <Products />
         </div>
     )
 }
