@@ -28,8 +28,11 @@ export default makeStyles((theme)=> ({
             display: 'none'
         }
     },
+    button: {
+        marginLeft: '20%'
+    },
     grow: {
-        flexGrow: 1
+        flexGrow: 1,
     },
     search: {
         position: 'relative',
