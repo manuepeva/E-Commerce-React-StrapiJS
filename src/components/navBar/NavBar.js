@@ -17,7 +17,7 @@ const NavBar = ({totalItems}) => {
                     className={classes.image}/>
                     E-Commerce with React
                 </Typography>
-                <div className={classes.grow}>
+                <div className={classes.grow}/>
                     <div className={classes.menuButton}>
                         <IconButton aria-label="Show Cart Items"
                         color="inherit">
@@ -25,7 +25,6 @@ const NavBar = ({totalItems}) => {
                                 <ShoppingCart />
                             </Badge>
                         </IconButton>
-                    </div>
                 </div>
                 </Toolbar>
             </AppBar>
