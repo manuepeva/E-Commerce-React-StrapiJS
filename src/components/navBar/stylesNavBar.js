@@ -9,7 +9,7 @@ export default makeStyles((theme)=> ({
         boxShadow: 'none',
         borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
         [theme.breakpoints.up('sm')]:{
-            width: 'calc(100% - ${drawerWidth}px',
+            width: `calc(100% - ${drawerWidth}px`,
             marginLeft: drawerWidth
         }
     },
