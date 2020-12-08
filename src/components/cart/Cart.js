@@ -6,14 +6,14 @@ import {Link} from 'react-router-dom'
 
 const Cart = ({cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart}) => {
     const classes = useStyles()
-    const EmptyCard = () => {
+    const EmptyCard = () => (
         <Typography variant="subtitle1">
             You Have No Items in Your Shopping.
                 <Link to="/" className={classes.link}>
                 Start Adding Something!
                 </Link>!
             </Typography>
-    }
+    )
     const FilledCart = () => (
         <div>
             <Grid container spacing={3}>
