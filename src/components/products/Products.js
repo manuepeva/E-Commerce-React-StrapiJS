@@ -12,7 +12,7 @@ const Products = ({products, handleAddToCart}) => {
         <main className={classes.content}>
             <div className={classes.toolbar}/>
             <Grid
-            container
+            contained
             justify="center"
             spacing={4}
             >
