@@ -16,7 +16,7 @@ const Cart = ({cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart}
     )
     const FilledCart = () => (
         <div>
-            <Grid container spacing={3}>
+            <Grid container>
                 {cart.line_items.map((item) => (
                     <Grid item xs={12} sm={4} key={item.id}>
                         {/* <CartItem /> */}
@@ -57,7 +57,7 @@ const Cart = ({cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart}
     if(!cart.line_items) return 'Loading...'
 
     return (
-        <Container>
+        <Container spacing={3}>
             <div className={classes.toolbar} />
             <Typography className={classes.title} 
             variant="h3" gutterBottom>Your Shopping Cart</Typography>

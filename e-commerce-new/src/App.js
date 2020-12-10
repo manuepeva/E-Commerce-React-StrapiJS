@@ -14,7 +14,6 @@ const App = () => {
     }
     const fetchCart = async () => {
         setCart(await commerce.cart.retrieve())
-        console.log((commerce.products.retrieve()), 'data from fetch')
     }
     const handleAddToCart = async (productId, quantity) => {
         const {cart} = await commerce.cart.add(productId, quantity)
@@ -56,7 +55,7 @@ const App = () => {
                 />
                 </Route>
                 <Route exact path="/checkout">
-                    <Checkout />
+                    <Checkout cart={cart}/>
                 </Route>
                 </Switch>
         </div>

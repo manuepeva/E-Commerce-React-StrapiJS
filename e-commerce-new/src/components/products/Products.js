@@ -10,12 +10,8 @@ const Products = ({products, handleAddToCart}) => {
     const classes = useStyles()
     return (
         <main className={classes.content}>
-            <div className={classes.toolbar}/>
-            <Grid
-            contained
-            justify="center"
-            spacing={4}
-            >
+            <div className={classes.toolbar} spacing={4} />
+            <Grid>
                 {
                     products.map((product) =>(
                         <Grid item key={product.id} 
