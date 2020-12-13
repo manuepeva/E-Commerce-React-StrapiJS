@@ -9,30 +9,54 @@ const App = () => {
     const [cart, setCart] = useState({})
 
     const fetchProducts = async () => {
-        const {data} = await commerce.products.list()
-        setProducts(data)
+        try {            
+            const {data} = await commerce.products.list()
+            setProducts(data)
+        } catch (error) {
+            console.log(error, 'error from products.list()')
+        }
     }
     const fetchCart = async () => {
-        setCart(await commerce.cart.retrieve())
+        try {          
+            setCart(await commerce.cart.retrieve())
+        } catch (error) {
+            console.log(error, 'error from cart.retrieve()')
+        }
     }
     const handleAddToCart = async (productId, quantity) => {
-        const {cart} = await commerce.cart.add(productId, quantity)
-        setCart(cart)
+        try {
+            const {cart} = await commerce.cart.add(productId, quantity)
+            setCart(cart)
+        } catch (error) {
+            console.log(error, 'error from cart.add()')
+        }
     }
 
     const handleUpdateCartQty = async (productId, quantity)=> {
-        const {cart} = await commerce.cart.update(productId, {quantity})
-        setCart(cart)
+        try {
+            const {cart} = await commerce.cart.update(productId, {quantity})
+            setCart(cart)
+        } catch (error) {
+            console.log(error, 'error from cart.update()')
+        }
     }
 
     const handleRemoveFromCart = async (productId) => {
-        const {cart} = await commerce.cart.remove(productId)
-        setCart(cart)
+        try {
+            const {cart} = await commerce.cart.remove(productId)
+            setCart(cart)
+        } catch (error) {
+            console.log(error, 'error from cart.remove()')
+        }
     }
 
     const handleEmptyCart = async () => {
-        const {cart} = await commerce.cart.empty()
-        setCart(cart)
+        try {
+            const {cart} = await commerce.cart.empty()
+            setCart(cart)
+        } catch (error) {
+            console.log(error, 'error from cart.empty()')
+        }
     }
 
     useEffect(() => {
