@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {Products, NavBar, Cart, Checkout} from './components'
 import {commerce} from './lib/commerce'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-
+import styles from './index.module.css'
 
 const App = () => {
     const [products, setProducts] = useState([])
@@ -65,7 +65,7 @@ const App = () => {
     }, [])
     return (
         <Router>
-        <div>
+        <div className="main_container">
             <NavBar totalItems = {cart.total_items} />
             <Switch>
                 <Route exact path="/">

@@ -11,7 +11,7 @@ const Products = ({products, handleAddToCart}) => {
     return (
         <main className={classes.content}>
             <div className={classes.toolbar} spacing={4} />
-            <Grid>
+            <Grid >
                 {
                     products.map((product) =>(
                         <Grid item key={product.id} 
