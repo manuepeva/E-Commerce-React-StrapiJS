@@ -12,14 +12,15 @@ const steps = ['Shipping Address', 'Payment Details']
 
 const Checkout = ({cart}) => {
     const [activeStep, setActiveSte] = useState(0)
+    const [token, setToken] = useState({})
     const [checkoutToken, setCheckoutToken] = useState(null)
     const classes = useStyles()
 
     useEffect(() => {
         const generateToken = async () => {
             try {
+                console.log(cart.id)
                 const token = await commerce.checkout.generateToken(cart.id, {type: 'cart'})
-                console.log(token, 'token from token')
                 setCheckoutToken(token)
             } catch (error) {
                 console.log(error)
