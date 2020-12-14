@@ -18,7 +18,8 @@ const AddressForm = ({checkoutToken}) => {
    let countries = Object.entries(countriess)
    console.log(shippingCountry, 'before return')
    let subdivisions = Object.entries(shippingSubDivisions)
-
+// let options = shippingOptions.map(() => )
+    console.log(shippingOptions)
     // const subdivisions = Object.entries(shippingSubDivisions).map(([code, name])=> 
     // {id: code; label: name})
 
@@ -36,6 +37,15 @@ const AddressForm = ({checkoutToken}) => {
         const lg = await commerce.services.localeListSubdivisions(countryCode).then((res)=> 
         setShippingSubDivisions(res.subdivisions))
     }
+    const fetchShippingOptions = async (checkoutTokenId, country, region = null) => {
+        const options = await commerce.checkout.getShippingOptions((checkoutTokenId), {
+            country,
+            region
+        })
+        setShippingOptions(options)
+        setShippingOption(options[0].id)
+        console.log(options, 'optins from address...')
+    }
     useEffect(() => {
         fetchShippingCountries(checkoutToken)
     }, [])
@@ -45,6 +55,11 @@ const AddressForm = ({checkoutToken}) => {
             fetchSubDivisions(shippingCountry)
         }
     }, [shippingCountry])
+    useEffect(() => {
+        if(shippingSubDivision){
+            fetchShippingOptions(checkoutToken.id, shippingCountry, shippingSubDivision)
+        }
+    }, [shippingSubDivision])
     return (
         <>
           <Typography variant="h6" gutterBottom>Shipping Address</Typography>
@@ -71,7 +86,7 @@ const AddressForm = ({checkoutToken}) => {
                         <InputLabel>Shipping Subdivision</InputLabel>
                         <Select value={shippingSubDivision} fullWidth onChange={(e) => setShippingSubDivision(e.target.value)}>
                         {subdivisions.map((sub, id) => (
-                            <MenuItem key={id} value={sub[0]}>
+                            <MenuItem key={id} value={sub[1]}>
                                 {sub[1]}
                             </MenuItem>
                             ))}
