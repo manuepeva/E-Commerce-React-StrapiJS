@@ -23,7 +23,7 @@ const Checkout = ({cart}) => {
                 const token = await commerce.checkout.generateToken(cart.id, {type: 'cart'})
                 setCheckoutToken(token)
             } catch (error) {
-                console.log(error)
+                console.log(error, 'error from generate token')
             }
         }
         generateToken()
