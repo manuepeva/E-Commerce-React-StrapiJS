@@ -17,11 +17,11 @@ const AddressForm = ({ checkoutToken }) => {
     let checkToken = checkoutToken.id
     const countries = Object.entries(countriess)
     const subdivisions = Object.entries(shippingSubDivisions)
+    console.log(subdivisions, 'subdi....!')
+        // console.log(subopt, 'sub divisioN')
     // let options = shippingOptions.map(() => )
     // const subdivisions = Object.entries(shippingSubDivisions).map(([code, name])=> 
     // {id: code; label: name})
-    const cre = shippingSubDivision
-    console.log(cre, '..._ss!')
     const fetchShippingCountries = async (checkoutTokenId) => {
         const dat = commerce.services.localeListShippingCountries(checkoutTokenId.id).then((res) =>
             setCountries(res.countries))
@@ -34,18 +34,25 @@ const AddressForm = ({ checkoutToken }) => {
         const response = await commerce.services.localeListSubdivisions(countryCode).then((res) =>
             setShippingSubDivision(Object.keys(res.subdivisions)[1]))
         const lg = await commerce.services.localeListSubdivisions(countryCode).then((res) =>
-            setShippingSubDivisions(Object.values(res.subdivisions)))
+            setShippingSubDivisions(Object.keys(res.subdivisions)))
         let lx = await commerce.services.localeListSubdivisions(countryCode).then((res) => 
-        console.log(res, 'res....'))
+        console.log(Object.keys(res.subdivisions), 'res....'))
     }
-    const fetchShippingOptions = async (checkToken, country) => {
+    const fetchShippingOptions = async (checkToken, country, localState = null) => {
         const options = await commerce.checkout.getShippingOptions(checkToken, {
             country,
-        }).then((res) => setShippingOptions(res))
+            localState
+        }).then((res) => setShippingOptions(res)+'')
         let fm = await commerce.checkout.getShippingOptions(checkToken, {
             country,
-        }).then((res) => setShippingOption(res[0].id))
+            localState
+        }).then((res) => setShippingOption(res[0].id)+'')
+        let ss = await commerce.checkout.getShippingOptions(checkToken, {
+            country,
+            localState
+        }).then((res) => console.log(res, 'res from options'))
     }
+    console.log(shippingSubDivision, 'shi opt')
     useEffect(() => {
         fetchShippingCountries(checkoutToken)
     }, [])
@@ -57,7 +64,7 @@ const AddressForm = ({ checkoutToken }) => {
     }, [shippingCountry])
     useEffect(() => {
         if (shippingSubDivision) {
-            fetchShippingOptions(checkoutToken.id, shippingCountry)
+            fetchShippingOptions(checkToken, shippingCountry, shippingSubDivision)
         }
     }, [shippingSubDivision])
     return (
@@ -65,7 +72,7 @@ const AddressForm = ({ checkoutToken }) => {
             <Typography variant="h6" gutterBottom>Shipping Address</Typography>
             <FormProvider {...methods}>
                 <form >
-                    <Grid container spacing={1} xs={12} sm={6}>
+                    <Grid container spacing={1} xs={12} sm={6} item={true}>
                         <CustomTextField required name="firstName" label="First Name" />
                         <CustomTextField required name="lastName" label="Last Name" />
                         <CustomTextField required name="address1" label="Address" />
@@ -86,7 +93,7 @@ const AddressForm = ({ checkoutToken }) => {
                             <InputLabel>Shipping Subdivision</InputLabel>
                             <Select value={shippingSubDivision} fullWidth onChange={(e) => setShippingSubDivision(e.target.value)}>
                                 {subdivisions.map((id, name) => (
-                                    <MenuItem key={id} value={id[0]}>
+                                    <MenuItem key={id} value={(id[1]+'')}>
                                         {id[1]}
                                     </MenuItem>
                                 ))}
