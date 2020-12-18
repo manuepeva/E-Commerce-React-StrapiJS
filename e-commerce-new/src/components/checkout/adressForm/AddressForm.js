@@ -6,7 +6,7 @@ import { commerce } from '../../../lib/commerce'
 import useStyles from './stylesAddressForm'
 import {Link} from 'react-router-dom'
 
-const AddressForm = ({ checkoutToken }) => {
+const AddressForm = ({ checkoutToken, next }) => {
     const [countriess, setCountries] = useState({})
     const [shippingCountries, setShippingCountries] = useState([])
     const [shippingCountry, setShippingCountry] = useState('')
@@ -75,7 +75,7 @@ const AddressForm = ({ checkoutToken }) => {
         <>
             <Typography variant="h6" gutterBottom>Shipping Address</Typography>
             <FormProvider {...methods}>
-                <form className={classes.formContainer}>
+                <form className={classes.formContainer} onSubmit={methods.handleSubmit((data) => next({...data, shippingCountry, shippingSubDivision, shippingOption}))}>
                     <Grid container spacing={1} xs={12} sm={6} item={true}>
                         <CustomTextField required name="firstName" label="First Name" />
                         <CustomTextField required name="lastName" label="Last Name" />
