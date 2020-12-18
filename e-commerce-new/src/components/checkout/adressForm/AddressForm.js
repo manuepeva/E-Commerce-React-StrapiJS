@@ -3,6 +3,8 @@ import { InputLabel, Select, MenuItem, Button, Grid, Typography } from '@materia
 import { useForm, FormProvider } from 'react-hook-form'
 import CustomTextField from '../customTextField/CustomTextField'
 import { commerce } from '../../../lib/commerce'
+import useStyles from './stylesAddressForm'
+import {Link} from 'react-router-dom'
 
 const AddressForm = ({ checkoutToken }) => {
     const [countriess, setCountries] = useState({})
@@ -12,12 +14,14 @@ const AddressForm = ({ checkoutToken }) => {
     const [shippingSubDivision, setShippingSubDivision] = useState('')
     const [shippingOptions, setShippingOptions] = useState([])
     const [shippingOption, setShippingOption] = useState('')
+    const classes = useStyles()
 
     const methods = useForm()
     let checkToken = checkoutToken.id
     const countries = Object.entries(countriess)
     const subdivisions = Object.entries(shippingSubDivisions)
     console.log(subdivisions, 'subdi....!')
+    const options = shippingOptions.map((so) => ({id: so, label:`${so.description} - (${so.price.formatted_with_symbol})`}))
         // console.log(subopt, 'sub divisioN')
     // let options = shippingOptions.map(() => )
     // const subdivisions = Object.entries(shippingSubDivisions).map(([code, name])=> 
@@ -71,7 +75,7 @@ const AddressForm = ({ checkoutToken }) => {
         <>
             <Typography variant="h6" gutterBottom>Shipping Address</Typography>
             <FormProvider {...methods}>
-                <form >
+                <form className={classes.formContainer}>
                     <Grid container spacing={1} xs={12} sm={6} item={true}>
                         <CustomTextField required name="firstName" label="First Name" />
                         <CustomTextField required name="lastName" label="Last Name" />
@@ -93,21 +97,28 @@ const AddressForm = ({ checkoutToken }) => {
                             <InputLabel>Shipping Subdivision</InputLabel>
                             <Select value={shippingSubDivision} fullWidth onChange={(e) => setShippingSubDivision(e.target.value)}>
                                 {subdivisions.map((id, name) => (
-                                    <MenuItem key={id} value={(id[1]+'')}>
+                                    <MenuItem key={id} value={id[1]}>
                                         {id[1]}
                                     </MenuItem>
                                 ))}
                             </Select>
                         </Grid>
-                        {/* <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={6}>
                         <InputLabel>Shipping Options</InputLabel>
-                        <Select value={} fullWidth onChange={}>
-                            <MenuItem key={} value={}>
-                                Select Me
+                        <Select value={shippingOption} fullWidth onChange={(e) => setShippingOption(e.target.value)}>
+                            {options.map((option) => (
+                            <MenuItem key={option.id} value={option.id}>
+                                {option.label}
                             </MenuItem>
+                            ))}
                         </Select>
-                    </Grid> */}
                     </Grid>
+                    </Grid>
+                    <br /> 
+                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                <Button component={Link} to="/cart" variant="outlined">Back To Cart</Button>
+                                <Button type="submit" variant="contained" color="primary">Next</Button>
+                    </div>
                 </form>
             </FormProvider>
         </>
