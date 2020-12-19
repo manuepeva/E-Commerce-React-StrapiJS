@@ -1,1 +1,1 @@
-[![Header](https://raw.githubusercontent.com/manuepeva/E-Commerce-React-StrapiJS/master/src/img/chinese-spoon.jpg "Header")](https://raw.githubusercontent.com/manuepeva/E-Commerce-React-StrapiJS/master/src/img/chinese-spoon.jpg/)
+[![Header](https://raw.githubusercontent.com/manuepeva/E-Commerce-React-StrapiJS/master/src/img/chinese-spoon.jpg "Header")](https://raw.githubusercontent.com/manuepeva/E-Commerce-React-StrapiJS/master/src/img/chinese-spoon.jpg/ max-width: 100%)
