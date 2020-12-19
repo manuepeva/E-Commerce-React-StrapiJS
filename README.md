@@ -4,4 +4,5 @@ Description: Application created using react boiler-plate npx create-react-app.
 
 ![Manuel's github stats](https://github-readme-stats.vercel.app/api?username=manuepeva&show_icons=true&theme=tokyonight)
 
+https://img.shields.io/badge/code-HTML-orange
 🇵🇪
