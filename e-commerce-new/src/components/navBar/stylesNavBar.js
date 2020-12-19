@@ -13,14 +13,15 @@ export default makeStyles((theme)=> ({
             marginLeft: drawerWidth
         }
     },
-    title: {
+    titleT: {
         flexGrow: 1,
         alignItems: 'center',
         display: 'flex',
         textDecoration: 'none'
     },
     image: {
-        marginRight: '10px'
+        marginRight: '10px',
+        borderRadius: '60%'
     },
     menuButton: {
         marginRight: theme.spacing(2),
@@ -28,8 +29,10 @@ export default makeStyles((theme)=> ({
             display: 'none'
         }
     },
-    button: {
-        marginLeft: '20%'
+    buttonN: {
+        marginLeft: '80%',
+        display: 'flex',
+        justifyContent: 'flex-end'
     },
     grow: {
         flexGrow: 1,
