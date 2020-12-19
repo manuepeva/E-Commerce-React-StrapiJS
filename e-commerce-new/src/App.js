@@ -7,6 +7,8 @@ import styles from './index.module.css'
 const App = () => {
     const [products, setProducts] = useState([])
     const [cart, setCart] = useState({})
+    const [order, setOrder] = useState({})
+    const [errorMessage, setErrorMessage] = useState('')
 
     const fetchProducts = async () => {
         try {            
@@ -14,6 +16,7 @@ const App = () => {
             setProducts(data)
         } catch (error) {
             console.log(error, 'error from products.list()')
+            setErrorMessage(error.data.error.message)
         }
     }
     const fetchCart = async () => {
@@ -21,6 +24,7 @@ const App = () => {
             setCart(await commerce.cart.retrieve())
         } catch (error) {
             console.log(error, 'error from cart.retrieve()')
+            setErrorMessage(error.data.error.message)
         }
     }
     const handleAddToCart = async (productId, quantity) => {
@@ -29,6 +33,7 @@ const App = () => {
             setCart(cart)
         } catch (error) {
             console.log(error, 'error from cart.add()')
+            setErrorMessage(error.data.error.message)
         }
     }
 
@@ -38,6 +43,7 @@ const App = () => {
             setCart(cart)
         } catch (error) {
             console.log(error, 'error from cart.update()')
+            setErrorMessage(error.data.error.message)
         }
     }
 
@@ -47,6 +53,7 @@ const App = () => {
             setCart(cart)
         } catch (error) {
             console.log(error, 'error from cart.remove()')
+            setErrorMessage(error.data.error.message)
         }
     }
 
@@ -56,6 +63,23 @@ const App = () => {
             setCart(cart)
         } catch (error) {
             console.log(error, 'error from cart.empty()')
+            setErrorMessage(error.data.error.message)
+        }
+    }
+
+    const refreshCart = async () => {
+        const newCart = await commerce.cart.refresh()
+        setCart(newCart)
+    }
+
+    const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
+        try {
+            const inconmingOrder = await commerce.checkout.capture(checkoutTokenId.id, newOrder)
+            setOrder(inconmingOrder)
+            refreshCart()
+        } catch (error) {
+            console.log(error, 'error from handleCaptureCheckout function')
+            setErrorMessage(error.data.error.message)
         }
     }
 
@@ -79,7 +103,12 @@ const App = () => {
                 />
                 </Route>
                 <Route exact path="/checkout">
-                    <Checkout cart={cart}/>
+                    <Checkout 
+                    cart={cart}
+                    order={order}
+                    handleCaptureCheckout={handleCaptureCheckout}
+                    error={errorMessage}
+                    />
                 </Route>
                 </Switch>
         </div>

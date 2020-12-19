@@ -10,7 +10,7 @@ import {commerce} from '../../lib/commerce'
 const steps = ['Shipping Address', 'Payment Details']
 
 
-const Checkout = ({cart}) => {
+const Checkout = ({cart, order, handleCaptureCheckout, error}) => {
     const [activeStep, setActiveSte] = useState(0)
     const [token, setToken] = useState({})
     const [checkoutToken, setCheckoutToken] = useState(null)
@@ -21,6 +21,7 @@ const Checkout = ({cart}) => {
         const generateToken = async () => {
             try {
                 const token = await commerce.checkout.generateToken(cart.id, {type: 'cart'})
+                console.log(token, 'ldldld---')
                 setCheckoutToken(token)
             } catch (error) {
                 console.log(error, 'error from generate token')
@@ -34,6 +35,7 @@ const Checkout = ({cart}) => {
     
     const next = (data) => {
         setShippingData(data)
+        nextStep()
     }
 
     const Confirmation = () => {
@@ -43,7 +45,13 @@ const Checkout = ({cart}) => {
 
     const Form = () => activeStep === 0 
     ? <AddressForm checkoutToken={checkoutToken} next={next}/> 
-    : <PaymentForm shippingData={shippingData}/>
+    : <PaymentForm 
+    shippingData={shippingData} 
+    checkoutToken={checkoutToken} 
+    nextStep={nextStep}
+    backStep={backStep}
+    handleCaptureCheckout={handleCaptureCheckout}
+    />
 
 
     return (
