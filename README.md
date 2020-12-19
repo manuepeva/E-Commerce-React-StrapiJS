@@ -1,1 +1,1 @@
-[![Header](https://github.com/manuepeva/readme_header.png "Header")](https://some-url.dev/)
+[![Header](https://raw.githubusercontent.com/manuepeva/E-Commerce-React-StrapiJS/master/src/img/chinese-spoon.jpg "Header")](https://raw.githubusercontent.com/manuepeva/E-Commerce-React-StrapiJS/master/src/img/chinese-spoon.jpg/)
