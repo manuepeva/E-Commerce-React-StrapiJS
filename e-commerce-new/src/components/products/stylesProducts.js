@@ -1,13 +1,16 @@
 import {makeStyles} from '@material-ui/core/styles'
 
 export default makeStyles((theme) => ({
-    toolbar: {},
+    toolbar: {
+
+    },
     content: {
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing(3)
     },
     root: {
-        // display: 'flex',
-        // flexGrow: 1
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, 30rem',
+        gridGap: '2rem'
     }
 }))
