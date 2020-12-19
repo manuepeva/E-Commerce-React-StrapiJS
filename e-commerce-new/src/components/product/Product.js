@@ -11,7 +11,7 @@ import useStyles from './stylesProduct'
 const Product = ({product, handleAddToCart}) => {
     const classes = useStyles()
     return (
-        <Card className={classes.root}>
+        <Card>
             <CardMedia 
             className={classes.media}
             image={product.media.source}

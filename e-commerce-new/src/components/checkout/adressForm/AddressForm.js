@@ -20,12 +20,8 @@ const AddressForm = ({ checkoutToken, next }) => {
     let checkToken = checkoutToken.id
     const countries = Object.entries(countriess)
     const subdivisions = Object.entries(shippingSubDivisions)
-    console.log(subdivisions, 'subdi....!')
     const options = shippingOptions.map((so) => ({id: so, label:`${so.description} - (${so.price.formatted_with_symbol})`}))
-        // console.log(subopt, 'sub divisioN')
-    // let options = shippingOptions.map(() => )
-    // const subdivisions = Object.entries(shippingSubDivisions).map(([code, name])=> 
-    // {id: code; label: name})
+
     const fetchShippingCountries = async (checkoutTokenId) => {
         const dat = commerce.services.localeListShippingCountries(checkoutTokenId.id).then((res) =>
             setCountries(res.countries))
@@ -39,8 +35,6 @@ const AddressForm = ({ checkoutToken, next }) => {
             setShippingSubDivision(Object.keys(res.subdivisions)[1]))
         const lg = await commerce.services.localeListSubdivisions(countryCode).then((res) =>
             setShippingSubDivisions(Object.keys(res.subdivisions)))
-        let lx = await commerce.services.localeListSubdivisions(countryCode).then((res) => 
-        console.log(Object.keys(res.subdivisions), 'res....'))
     }
     const fetchShippingOptions = async (checkToken, country, localState = null) => {
         const options = await commerce.checkout.getShippingOptions(checkToken, {
@@ -51,12 +45,7 @@ const AddressForm = ({ checkoutToken, next }) => {
             country,
             localState
         }).then((res) => setShippingOption(res[0].id)+'')
-        let ss = await commerce.checkout.getShippingOptions(checkToken, {
-            country,
-            localState
-        }).then((res) => console.log(res, 'res from options'))
     }
-    console.log(shippingSubDivision, 'shi opt')
     useEffect(() => {
         fetchShippingCountries(checkoutToken)
     }, [])
@@ -115,7 +104,7 @@ const AddressForm = ({ checkoutToken, next }) => {
                     </Grid>
                     </Grid>
                     <br /> 
-                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <div style={{display: 'flex', justifyContent: 'space-between', maxWidth: '29rem'}}>
                                 <Button component={Link} to="/cart" variant="outlined">Back To Cart</Button>
                                 <Button type="submit" variant="contained" color="primary">Next</Button>
                     </div>
